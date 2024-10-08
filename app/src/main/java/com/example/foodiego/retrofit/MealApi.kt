@@ -1,9 +1,8 @@
 package com.example.foodiego.retrofit
 
-import com.example.foodiego.pojo.CategoryList
+import com.example.foodiego.pojo.MealsByCategoryList
 import com.example.foodiego.pojo.MealList
 import retrofit2.Call
-import retrofit2.Callback
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -15,5 +14,5 @@ interface MealApi {
     fun getMealDetails(@Query("i") id:String) : Call<MealList>
 
     @GET("filter.php?")
-    fun getPopularItems(@Query("c") categoryName : String) : Call<CategoryList>
+    fun getPopularItems(@Query("c") categoryName : String) : Call<MealsByCategoryList>
 }

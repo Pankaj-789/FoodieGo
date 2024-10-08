@@ -4,27 +4,34 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.example.foodiego.databinding.PopularItemsBinding
-import com.example.foodiego.pojo.CategoryMeals
-import com.example.foodiego.pojo.MealList
+import com.example.foodiego.pojo.MealsByCategory
 
-class MostPopularAdapter() : RecyclerView.Adapter<MostPopularAdapter.PopularItemsViewHolder>(){
-
-    private var mealList = ArrayList<CategoryMeals>()
+class MostPopularAdapter() : RecyclerView.Adapter<MostPopularAdapter.PopularItemsViewHolder>() {
+    lateinit var onItemClick:((MealsByCategory)-> Unit)
+    private val mealList = mutableListOf<MealsByCategory>()
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setMeals(mealList : ArrayList<CategoryMeals>){
-        this.mealList = mealList
+    fun setMeals(list: List<MealsByCategory>) {
+        mealList.clear()
+        mealList.addAll(list)
         notifyDataSetChanged()
     }
-    class PopularItemsViewHolder(val binding : PopularItemsBinding):RecyclerView.ViewHolder(binding.root){
+
+    class PopularItemsViewHolder(val binding: PopularItemsBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularItemsViewHolder {
-        return PopularItemsViewHolder(PopularItemsBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+        return PopularItemsViewHolder(
+            PopularItemsBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
 
     }
 
@@ -37,5 +44,9 @@ class MostPopularAdapter() : RecyclerView.Adapter<MostPopularAdapter.PopularItem
         Glide.with(holder.itemView)
             .load(mealList[position].strMealThumb)
             .into(holder.binding.popularItemsIv)
+
+        holder.itemView.setOnClickListener{
+            onItemClick.invoke(mealList[position])
         }
+    }
 }

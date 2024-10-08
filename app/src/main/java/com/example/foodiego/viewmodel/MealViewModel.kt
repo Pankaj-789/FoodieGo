@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.foodiego.pojo.CategoryList
+import com.example.foodiego.pojo.MealsByCategoryList
 import com.example.foodiego.pojo.Meal
 import com.example.foodiego.pojo.MealList
 import com.example.foodiego.retrofit.RetrofitInstance
@@ -15,7 +15,7 @@ import retrofit2.Response
 class MealViewModel : ViewModel() {
 
     private var mealDetailsLiveData = MutableLiveData<Meal>()
-    private var popularItemsLiveData = MutableLiveData<List<CategoryList>>()
+    private var popularItemsLiveData = MutableLiveData<List<MealsByCategoryList>>()
 
     fun getMealDetails(id : String){
         RetrofitInstance.api.getMealDetails(id).enqueue(object : Callback<MealList> {
@@ -41,7 +41,7 @@ class MealViewModel : ViewModel() {
 
 
 
-    fun observePopularItemsLiveData():LiveData<List<CategoryList>>{
+    fun observePopularItemsLiveData():LiveData<List<MealsByCategoryList>>{
         return popularItemsLiveData
     }
 }
