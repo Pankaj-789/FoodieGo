@@ -40,7 +40,9 @@ android {
 }
 
 dependencies {
+
     val nav_version = "2.8.1"
+    val lifecycle_version = "2.8.6"
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -61,8 +63,11 @@ dependencies {
 
     implementation (libs.android.gif.drawable)
 
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation ("com.squareup.retrofit2:converter-gson:2.3.0")
+    implementation(libs.retrofit)
+    implementation (libs.converter.gson)
 
-    implementation ("com.github.bumptech.glide:glide:4.12.0")
+    implementation (libs.glide)
+
+    implementation (libs.androidx.lifecycle.viewmodel.ktx.v286)
+    implementation (libs.androidx.lifecycle.extensions.v220)
 }
